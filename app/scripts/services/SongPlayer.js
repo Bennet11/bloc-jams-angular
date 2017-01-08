@@ -71,12 +71,16 @@
 
 
         SongPlayer.currentSong = null;
-
         /**
           * @desc Current playback time (in seconds) of currently playing song
           * @type {Number}
         */
         SongPlayer.currentTime = null;
+
+        SongPlayer.volume = 50;
+        /**
+        * i created an attribute to hold the value of volume
+        */
 
         SongPlayer.play = function(song) {
             song = song || SongPlayer.currentSong;
@@ -128,6 +132,12 @@
         SongPlayer.setCurrentTime = function(time) {
           if (currentBuzzObject) {
             currentBuzzObject.setTime(time);
+          }
+        }
+
+        SongPlayer.setVolume = function(volume) {
+          if (currentBuzzObject) {
+            currentBuzzObject.setVolume(volume)
           }
         }
 
