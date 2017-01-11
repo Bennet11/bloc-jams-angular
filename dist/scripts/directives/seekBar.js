@@ -22,6 +22,8 @@
 
         var seekBar = $(element);
 
+        console.log(attributes);
+
         attributes.$observe('value', function(newValue) {
           scope.value = newValue;
         });
@@ -35,6 +37,12 @@
           var max = scope.max;
           var percent = value / max * 100;
           return percent + "%";
+        };
+
+        var notifyOnChange = function(newValue) {
+          if (typeof scope.onChange == 'function') {
+            scope.onChange({value: newValue});
+          }
         };
 
         scope.fillStyle = function() {
@@ -59,12 +67,6 @@
               notifyOnChange(scope.value);
             });
           });
-
-        var notifyOnChange = function(newValue) {
-          if (typeof scope.onChange == 'function') {
-            scope.onChange({value: newValue});
-          }
-        };
 
           $document.bind('mouseup.thumb', function() {
             $document.unbind('mousemove.thumb');
